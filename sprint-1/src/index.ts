@@ -1,2 +1,2 @@
-import './ex1A';
-import './ex1B';
+import './exercise1A';
+import './exercise1B';
