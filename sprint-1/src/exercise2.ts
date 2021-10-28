@@ -27,13 +27,15 @@ export const createFunctionFilterPersonByProperty: personFilterFunctionByPropert
     return (item: person): boolean => item[propertyName as keyof person] === searchValue;
 };
 
-const idSelectElement = document.getElementById('exercise2-id-input') as HTMLSelectElement;
-const nameOutputPElement = document.getElementById('exercise2-name-span') as HTMLParagraphElement;
-const bioOutputPElement = document.getElementById('exercise2-bio-span') as HTMLParagraphElement;
+const idSelectElement = document.getElementById('exercise2-id-select') as HTMLSelectElement;
+const nameOutputElement = document.getElementById('exercise2-name-span') as HTMLParagraphElement;
+const bioOutputElement = document.getElementById('exercise2-bio-span') as HTMLParagraphElement;
 const editFormSelectElement = document.getElementById('exercise2-edit-form-select') as HTMLSelectElement;
 const editFormElement = document.getElementById('exercise2-edit-form') as HTMLFormElement;
 const editFormInputElement = document.getElementById('exercise2-edit-form-input') as HTMLInputElement;
 const formDeleteButtonElement = document.getElementById('exercise2-form-delete-button') as HTMLInputElement;
+const formEditButtonElement = document.getElementById('exercise2-edit-form-submit-button') as HTMLInputElement;
+//Valores para carregar o item inicial
 let selectedEditField: string = 'name';
 let selectedItemId: number = 1;
 
@@ -43,8 +45,8 @@ idSelectElement.addEventListener('change', (): void=>{
         selectedItemId = integerId;
         const personName: string = getPersonNameByIdImperative(lista, integerId);
         const personBio: string = getPersonBioByIdFunctional(lista, integerId);
-        nameOutputPElement.textContent = personName;
-        bioOutputPElement.textContent = personBio;
+        nameOutputElement.textContent = personName;
+        bioOutputElement.textContent = personBio;
         if(selectedEditField === 'name'){
             editFormInputElement.value = personName;
         }else{
@@ -55,38 +57,36 @@ idSelectElement.addEventListener('change', (): void=>{
 editFormElement.addEventListener('submit',(event: SubmitEvent): void=>{
     //Para evitar o recarregamento da página
     event.preventDefault();
-    //Armazena o novo valor do campo selecionado, edita esse campo e depois atualiza a interface
-    //para mostrar a mudança
     const propertyNewValue: string = editFormInputElement.value;
     lista = changePersonPropertyImperative(lista, selectedItemId, selectedEditField, propertyNewValue);  
     updateDisplayedItem();
 });
 
 editFormSelectElement.addEventListener('change', (): void=>{
-    //Armazena o valor selecionado pelo usuário (nome ou bio) e atualiza qual item está sendo exibido
-    const selectedIndex: number = editFormSelectElement.selectedIndex;
-    const selectedField = editFormSelectElement[selectedIndex] as HTMLOptionElement;
-    const selectedValue: string = selectedField.value;
-    selectedEditField = selectedValue;
+    selectedEditField = editFormSelectElement.value;
     updateDisplayedItem();
 });
 
 formDeleteButtonElement.addEventListener('click', (): void=>{
     lista = deletePersonByIdFunctional(lista, selectedItemId);
-    const nextItem: number = lista.find((item: person): boolean=> item.id !== selectedItemId).id;
-    selectedItemId = nextItem;
-    const optionsArray: Array<HTMLOptionElement> = mapListItemsToOptions(lista);
-    appendChildToSelect(optionsArray);
+    if(lista.length === 0){
+        formEditButtonElement.disabled = true;
+        formDeleteButtonElement.disabled = true;
+        editFormSelectElement.disabled = true;
+        clearElementChildren(idSelectElement);
+        return;
+    }
+    loadPageItems(lista);
     updateDisplayedItem();
 });
 
 window.addEventListener('load', (): void=>{
     //Pra carregar os itens ao acabar o carregamento da página, isso é necessário
-    //pq as opções do select estão sendo geradas dinâmicamente
+    //pq as opções do select são geradas dinâmicamente
     loadPageItems(lista);
 })
 
-//Caso um outro elemento que não seja o idInput atualize a lista e seja necessário atualizar a interface
+//Caso um outro elemento que não seja o idSelectElement atualize a lista e seja necessário atualizar a interface
 //para mostrar a mudança ao usuário
 function updateDisplayedItem(): void{
     const updateUi: Event = new Event('change');
@@ -94,13 +94,10 @@ function updateDisplayedItem(): void{
 }
 
 function mapListItemsToOptions(array: Array<person>): Array<HTMLOptionElement>{
-    while(idSelectElement.children[0]){
-        const firstChild = idSelectElement.children[0] as HTMLOptionElement;
-        firstChild.remove();
-    };
+    clearElementChildren(idSelectElement);
 
     const personOptions: Array<HTMLOptionElement> = array.map((item: person): HTMLOptionElement=>{
-        const optionElement = document.createElement('option');
+        const optionElement = document.createElement('option') as HTMLOptionElement;
         optionElement.value = item.id.toString();
         optionElement.innerText = item.id.toString();
         return optionElement;
@@ -119,4 +116,11 @@ function loadPageItems(array: Array<person>):void{
     const optionsArray: Array<HTMLOptionElement> = mapListItemsToOptions(array);
     appendChildToSelect(optionsArray);
     updateDisplayedItem();
+}
+
+function clearElementChildren(element:HTMLElement){
+    while(element.children[0]){
+        const firstChild = element.children[0] as HTMLElement;
+        firstChild.remove();
+    };
 }
