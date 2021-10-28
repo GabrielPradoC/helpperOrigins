@@ -1,5 +1,11 @@
 body{
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-content: center;
     margin-top: 30px;
+    flex-wrap: wrap;
+    background-color: rgb(250, 144, 132);
+    #ex2{
+        max-width: 50%;
+    }
 }
