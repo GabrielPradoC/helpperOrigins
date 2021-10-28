@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "tsc",
-    "build": "webpack"
+    "build": "webpack",
+    "watch": "webpack -w"
   },
   "author": "Gabriel Prado",
   "license": "GPL-3.0",
