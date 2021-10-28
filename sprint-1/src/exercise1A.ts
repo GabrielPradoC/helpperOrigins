@@ -1,4 +1,4 @@
-import getVowelCount from "./getVowelCount";
+import getVowelCount from './getVowelCount';
 
 const sampleTextDisplayElement: HTMLSpanElement = document.getElementById('exercise1-function-display-input') as HTMLSpanElement;
 const vowelCountDisplayElement: HTMLInputElement = document.getElementById('exercise1-function-display-output') as HTMLInputElement;

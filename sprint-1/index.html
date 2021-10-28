@@ -33,8 +33,32 @@
             {"id" : 1, "name": "Ada Lovelace", "bio" : "Ada Lovelace, foi uma matemática e escritora inglesa reconhecida por ter escrito o primeiro algoritmo para ser processado por uma máquina"},
             {"id" : 2, "name": "Alan Turing", "bio" : "Alan Turing foi um matemático, cientista da computação, lógico, criptoanalista, filósofo e biólogo teórico britânico, ele é amplamente considerado o pai da ciência da computação teórica e da inteligência artificia"},
             {"id" : 3, "name": "Nikola Tesla", "bio" : "Nikola Tesla foi um inventor, engenheiro eletrotécnico e engenheiro mecânico sérvio, mais conhecido por suas contribuições ao projeto do moderno sistema de fornecimento de eletricidade em corrente alternada."},
-            {"id" : 4, "name": "Nicolau Copérnico", "bio": "Nicolau Copérnico foi um astrônomo e matemático polonês que desenvolveu a teoria heliocêntrica do Sistema Solar."}</code>
-
+            {"id" : 4, "name": "Nicolau Copérnico", "bio": "Nicolau Copérnico foi um astrônomo e matemático polonês que desenvolveu a teoria heliocêntrica do Sistema Solar."}
+        </code>
+        <br><br><br>
+        <div>
+            <h2>Selecione o id para busca: </h2>
+            <select id="exercise2-id-input">
+                
+            </select>
+            <br><br><br>
+            <p>Name: <span id="exercise2-name-span"></span></p>
+            <p>Bio: <span id="exercise2-bio-span"></span></p>
+            <form id="exercise2-edit-form">
+               <label>
+                Selecione o campo para editar:
+                    <select id="exercise2-edit-form-select">
+                        <option value="name">Nome</option>
+                        <option value="bio">Bio</option>
+                    </select>
+               </label>
+               <br>
+               <input type="text" id="exercise2-edit-form-input">
+               <input type="submit" value="Editar">
+               <input type="button" id="exercise2-form-delete-button" value="Deletar item">
+           </form>
+        </div>
+        
     </div>
 </body>
 </html>

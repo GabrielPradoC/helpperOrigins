@@ -1,4 +1,4 @@
-import getVowelCount from "./getVowelCount";
+import getVowelCount from './getVowelCount';
 
 const vowelCountFormElement: HTMLFormElement = document.getElementById('exercise1-form') as HTMLFormElement;
 
