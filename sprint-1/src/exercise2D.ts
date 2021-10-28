@@ -1,11 +1,11 @@
-import { person,lista, personProperties} from './exercise2';
+import { person, personProperties, } from './exercise2';
 
 //Abordagem funcional
 
 function changePersonPropertyFunctional(array: Array<person>, id: number, propertyName: personProperties, propertyNewValue: string): Array<person>{
     const findAndChangeItemProperty = (item: person): person =>{
         if(item.id === id){
-            //copia o item original e depois substitui o conteúdo da propriedade escolhida
+            //Copia o item original e depois substitui o conteúdo da propriedade escolhida
             return {...item, [propertyName]: propertyNewValue };
         }else{
             return item;

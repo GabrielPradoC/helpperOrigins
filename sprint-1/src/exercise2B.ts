@@ -1,9 +1,9 @@
-import { person, createFunctionFilterPersonByProperty } from './exercise2';
+import { person, createFunctionFilterPersonByProperty, personFilterFunction } from './exercise2';
 
 //Abordagem funcional
 
 function getPersonNameByIdFunctional(array: Array<person>, id: number): string{
-    const findPersonById  = createFunctionFilterPersonByProperty('id',id);
+    const findPersonById: personFilterFunction  = createFunctionFilterPersonByProperty('id',id);
     const [ desiredItem ] = array.filter(findPersonById) as Array<person>;
     return desiredItem.name;
 }
