@@ -4,8 +4,17 @@ body{
     align-content: center;
     margin-top: 30px;
     flex-wrap: wrap;
+    padding-bottom: 150px;
     background-color: rgb(250, 144, 132);
     #exercise2{
         max-width: 50%;
+    }
+    #exercise3{
+        table{
+           margin: auto;
+           td{
+               text-align: center;
+           }
+        }
     }
 }

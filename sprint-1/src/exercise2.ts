@@ -80,12 +80,6 @@ formDeleteButtonElement.addEventListener('click', (): void=>{
     updateDisplayedItem();
 });
 
-window.addEventListener('load', (): void=>{
-    //Pra carregar os itens ao acabar o carregamento da página, isso é necessário
-    //pq as opções do select são geradas dinâmicamente
-    loadPageItems(lista);
-})
-
 //Caso um outro elemento que não seja o idSelectElement atualize a lista e seja necessário atualizar a interface
 //para mostrar a mudança ao usuário
 function updateDisplayedItem(): void{
@@ -112,7 +106,7 @@ function appendChildToSelect(optionArray: Array<HTMLOptionElement>): void{
     idSelectElement.appendChild(documentFragment);
 }
 
-function loadPageItems(array: Array<person>):void{
+export function loadPageItems(array: Array<person>):void{
     const optionsArray: Array<HTMLOptionElement> = mapListItemsToOptions(array);
     appendChildToSelect(optionsArray);
     updateDisplayedItem();
