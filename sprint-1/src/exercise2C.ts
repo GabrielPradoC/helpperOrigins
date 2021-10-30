@@ -1,20 +1,32 @@
-import { person, personFilterFunction } from './exercise2';
+import { Person, PersonFilterFunction } from './exercise2';
 
 //Abordagem funcional 
 
-export function deletePersonByIdFunctional(array: Array<person>, id: number): Array<person>{
-    const hasDifferentId: personFilterFunction = (item: person): boolean => item.id !== id;
-    return array.filter(hasDifferentId);
+/**
+ * Remove o objeto com o id informado do array informado e retorna o array
+ * @param personList Array com os objetos tipo pessoa
+ * @param id Id do objeto tipo pessoa para buscar
+ * @returns 
+ */
+export function deletePersonByIdFunctional(personList: Array<Person>, id: number): Array<Person>{
+    const hasDifferentId: PersonFilterFunction = (item: Person): boolean => item.id !== id;
+    return personList.filter(hasDifferentId);
 }
 
 //Abordagem imperativa
 
-function deletePersonByIdImperative(array: Array<person>, id: number): Array<person>{
-    const filteredArray: Array<person> = [];
+/**
+ * Remove o objeto com o id informado do array informado e retorna o array
+ * @param personList Array com os objetos tipo pessoa
+ * @param id Id do objeto tipo pessoa para buscar
+ * @returns 
+ */
+function deletePersonByIdImperative(personList: Array<Person>, id: number): Array<Person>{
+    const filteredArray: Array<Person> = [];
     
-    for(let i: number = 0; i< array.length; i++){
-        if(array[i].id !== id){
-            filteredArray.push(array[i]);
+    for(let i: number = 0; i< personList.length; i++){
+        if(personList[i].id !== id){
+            filteredArray.push(personList[i]);
         }
     }
 

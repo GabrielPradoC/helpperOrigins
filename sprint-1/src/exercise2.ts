@@ -3,29 +3,23 @@ import { getPersonNameByIdImperative } from './exercise2B';
 import { deletePersonByIdFunctional } from './exercise2C';
 import { changePersonPropertyImperative } from './exercise2D';
 
-export type person = {
+export type Person = {
     readonly id: number;
     name: string;
     bio: string;
     [key: string]: string|number;
 };
 
-export type personProperties = keyof person;
+export type PersonProperties = keyof Person;
 
-type personFilterFunctionByProperty = (propertyName: string, searchValue: string | number) => personFilterFunction;
+export type PersonFilterFunction = (item: Person)=> boolean;
 
-export type personFilterFunction = (item: person)=> boolean;
-
-export let personList: Array<person> = [
+export let personList: Array<Person> = [
     {"id" : 1, "name": "Ada Lovelace", "bio" : "Ada Lovelace, foi uma matemática e escritora inglesa reconhecida por ter escrito o primeiro algoritmo para ser processado por uma máquina"},
     {"id" : 2, "name": "Alan Turing", "bio" : "Alan Turing foi um matemático, cientista da computação, lógico, criptoanalista, filósofo e biólogo teórico britânico, ele é amplamente considerado o pai da ciência da computação teórica e da inteligência artificia"},
     {"id" : 3, "name": "Nikola Tesla", "bio" : "Nikola Tesla foi um inventor, engenheiro eletrotécnico e engenheiro mecânico sérvio, mais conhecido por suas contribuições ao projeto do moderno sistema de fornecimento de eletricidade em corrente alternada."},
     {"id" : 4, "name": "Nicolau Copérnico", "bio": "Nicolau Copérnico foi um astrônomo e matemático polonês que desenvolveu a teoria heliocêntrica do Sistema Solar."}
 ]
-
-export const createFunctionFilterPersonByProperty: personFilterFunctionByProperty = (propertyName: string, searchValue: personProperties) => {
-    return (item: person): boolean => item[propertyName as keyof person] === searchValue;
-};
 
 const idSelectElement = document.getElementById('exercise2-id-select') as HTMLSelectElement;
 const nameOutputElement = document.getElementById('exercise2-name-span') as HTMLParagraphElement;
@@ -82,15 +76,23 @@ formDeleteButtonElement.addEventListener('click', (): void=>{
 
 //Caso um outro elemento que não seja o idSelectElement atualize a lista e seja necessário atualizar a interface
 //para mostrar a mudança ao usuário
+/**
+ * Dispara um evento para recriar qual item está sendo exibido na página
+ */
 function updateDisplayedItem(): void{
     const updateUi: Event = new Event('change');
     idSelectElement.dispatchEvent(updateUi);
 }
 
-function mapListItemsToOptions(array: Array<person>): Array<HTMLOptionElement>{
+/**
+ * Cria e retorna um array de elementos li para cada pessoa passada na personList
+ * @param personList Array de objetos tipo pessoa
+ * @returns Array com elementos li
+ */
+function mapListItemsToOptions(personList: Array<Person>): Array<HTMLOptionElement>{
     clearElementChildren(idSelectElement);
 
-    const personOptions: Array<HTMLOptionElement> = array.map((item: person): HTMLOptionElement=>{
+    const personOptions: Array<HTMLOptionElement> = personList.map((item: Person): HTMLOptionElement=>{
         const optionElement = document.createElement('option') as HTMLOptionElement;
         optionElement.value = item.id.toString();
         optionElement.innerText = item.id.toString();
@@ -100,19 +102,31 @@ function mapListItemsToOptions(array: Array<person>): Array<HTMLOptionElement>{
     return personOptions;
 }
 
+/**
+ * Anexa os elementos option passados como argumento ao elemento select
+ * @param optionArray Array com os elementos option
+ */
 function appendChildToSelect(optionArray: Array<HTMLOptionElement>): void{
     const documentFragment: DocumentFragment = document.createDocumentFragment();
     documentFragment.append(...optionArray);
     idSelectElement.appendChild(documentFragment);
 }
 
-export function loadPageItems(array: Array<person>):void{
-    const optionsArray: Array<HTMLOptionElement> = mapListItemsToOptions(array);
+/**
+ * Mapeia o array passado como argumento para elementos option, anexa eles ao elemento select e depois atualiza qual elemento está sendo exibido 
+ * @param personList Array com os objetos tipo pessoa
+ */
+export function loadPageItems(personList: Array<Person>):void{
+    const optionsArray: Array<HTMLOptionElement> = mapListItemsToOptions(personList);
     appendChildToSelect(optionsArray);
     updateDisplayedItem();
 }
 
-function clearElementChildren(element:HTMLElement){
+/**
+ * Remove todos os elementos filhos de um elemento raiz
+ * @param element Elemento raiz
+ */
+function clearElementChildren(element:HTMLElement): void{
     while(element.children[0]){
         const firstChild = element.children[0] as HTMLElement;
         firstChild.remove();

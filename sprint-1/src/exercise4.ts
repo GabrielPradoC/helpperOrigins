@@ -3,9 +3,9 @@ type tableDataActionButtons = {
     deleteButton: HTMLButtonElement
 }
 
-import { person, personList } from "./exercise2";
+import { Person, personList } from "./exercise2";
 
-let listCopy: Array<person> = [...personList];
+let listCopy: Array<Person> = [...personList];
 const outputTableElement = document.getElementById('exercise4-table-body') as HTMLTableElement;
 const editFormElement = document.getElementById('exercise4-table-edit-form') as HTMLFormElement;
 
@@ -13,13 +13,13 @@ editFormElement.addEventListener('submit', (event: SubmitEvent): void=>{
     event.preventDefault();
     const clickedButtonElement = event.submitter as HTMLButtonElement;
     const editingPersonId: number = parseInt(clickedButtonElement.value);
-    const personExists: boolean = !!listCopy.find((item: person)=> item.id === editingPersonId);
+    const personExists: boolean = !!listCopy.find((item: Person)=> item.id === editingPersonId);
     if((clickedButtonElement.value === 'cancel') || (!personExists)){
         deleteElementChildren(editFormElement);
     }else{
         const nameInputElement = editFormElement.querySelector('.name .name-input') as HTMLInputElement;
         const bioInputElement = editFormElement.querySelector('.bio .bio-input') as HTMLInputElement;
-        const oldPersonIndex: number = listCopy.findIndex((item: person): boolean=> item.id === editingPersonId);
+        const oldPersonIndex: number = listCopy.findIndex((item: Person): boolean=> item.id === editingPersonId);
         listCopy[oldPersonIndex].name = nameInputElement.value;
         listCopy[oldPersonIndex].bio = bioInputElement.value;
         deleteElementChildren(outputTableElement);
@@ -34,7 +34,7 @@ createAndAppendPersonData(listCopy);
  * Cria um table row para cada pessoa no itemArray e anexa ao DOM
  * @param itemArray Array contendo objetos do tipo pessoa
  */
-function createAndAppendPersonData(itemArray: Array<person>): void{
+function createAndAppendPersonData(itemArray: Array<Person>): void{
     const tableRowArray: Array<HTMLTableRowElement> = itemArray.map(createPersonTableRow);
     outputTableElement.append(...tableRowArray);
 }
@@ -44,7 +44,7 @@ function createAndAppendPersonData(itemArray: Array<person>): void{
  * @param item Objeto do tipo pessoa
  * @returns Retorna um elemento table row
  */
-function createPersonTableRow(item: person): HTMLTableRowElement{
+function createPersonTableRow(item: Person): HTMLTableRowElement{
     const tableRowElement = document.createElement('tr') as HTMLTableRowElement;
     const personTableData: Array<HTMLTableCellElement> = createPersonTableData(item);
     tableRowElement.id = `exercise4-table-row-person-${item.id}`;
@@ -61,7 +61,7 @@ function createPersonTableRow(item: person): HTMLTableRowElement{
  * @param item Objeto do tipo pessoa
  * @returns Retorna um array contendo elementos table cell
  */
-function createPersonTableData(item: person): Array<HTMLTableCellElement>{
+function createPersonTableData(item: Person): Array<HTMLTableCellElement>{
     const tableRowArray: Array<HTMLTableCellElement> = [];
     for(let property in item){
         const tableCellElement = document.createElement('td') as HTMLTableCellElement;
@@ -92,8 +92,8 @@ function createTableActionButtons(personId: number): tableDataActionButtons{
  * @param personId Id da pessoa para pesquisar
  * @returns O objeto do tipo pessoa com o id informado
  */
-function getPersonInfo(personId: number): person{
-    const [ requestedPerson ]: Array<person> = listCopy.filter((person: person)=> person.id === personId);
+function getPersonInfo(personId: number): Person{
+    const [ requestedPerson ]: Array<Person> = listCopy.filter((person: Person)=> person.id === personId);
     return requestedPerson;
 }
 
@@ -104,7 +104,7 @@ function getPersonInfo(personId: number): person{
 function deleteTableRowElement(personId: number): void{
     const tableBody = document.getElementById('exercise4-table-body') as HTMLTableElement;
     deleteElementChildren(tableBody);
-    listCopy = listCopy.filter((item: person): boolean=> item.id !== personId);
+    listCopy = listCopy.filter((item: Person): boolean=> item.id !== personId);
     updateUi();
 }
 
@@ -114,7 +114,7 @@ function deleteTableRowElement(personId: number): void{
  */
 function createEditInputElement(personId: number): void{
     const formAlreadyExists: boolean = !!editFormElement.childElementCount;
-    const person: person = getPersonInfo(personId);
+    const person: Person = getPersonInfo(personId);
     //Se existir um formulário ele atualiza a informação de qual pessoa está sendo exibida
     //Se não existir ele chama outra função para criar o formulário
     if(formAlreadyExists){

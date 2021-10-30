@@ -1,21 +1,31 @@
-import { person, createFunctionFilterPersonByProperty, personFilterFunction } from './exercise2';
+import { Person } from './exercise2';
 
 //Abordagem funcional
-
-export function getPersonBioByIdFunctional(array: Array<person>, id: number): string{
-    const findPersonById: personFilterFunction = createFunctionFilterPersonByProperty('id',id);
-    const [ desiredItem ] = array.filter(findPersonById) as Array<person>;
+/**
+ * Retorna a bio do elemento do id informado
+ * @param personList Array com os objetos tipo pessoa
+ * @param id Id do objeto tipo pessoa para buscar
+ * @returns 
+ */
+export function getPersonBioByIdFunctional(personList: Array<Person>, id: number): string{
+    const [ desiredItem ] = personList.filter((item: Person): boolean=> item.id === id);
     return desiredItem.bio;
 }
 
 //Abordagem imperativa
 
-function getPersonBioByIdImperative(array: Array<person>, id: number): string{
-    let desiredItem: person = null;
+/**
+ * Retorna a bio do elemento do id informado
+ * @param personList Array com os objetos tipo pessoa
+ * @param id Id do objeto tipo pessoa para buscar
+ * @returns 
+ */
+function getPersonBioByIdImperative(personList: Array<Person>, id: number): string{
+    let desiredItem: Person = null;
 
-    for(let i: number = 0; i < array.length; i++){
-        if(array[i].id === id){
-            desiredItem = array[i];
+    for(let i: number = 0; i < personList.length; i++){
+        if(personList[i].id === id){
+            desiredItem = personList[i];
             break;
         }
     }

@@ -1,9 +1,17 @@
-import { person, personProperties, } from './exercise2';
+import { Person, PersonProperties, } from './exercise2';
 
 //Abordagem funcional
 
-function changePersonPropertyFunctional(array: Array<person>, id: number, propertyName: personProperties, propertyNewValue: string): Array<person>{
-    const findAndChangeItemProperty = (item: person): person =>{
+/**
+ * Muda a propriedade desejada do objeto com a id informada e retorna o array com o objeto editado
+ * @param personList Array com todos os objetos tipo pessoa
+ * @param id Id do objeto tipo pessoa para buscar
+ * @param propertyName Nome da propriedade a ser editada
+ * @param propertyNewValue O novo valor para essa propriedade
+ * @returns Novo array com o objeto editado
+ */
+function changePersonPropertyFunctional(personList: Array<Person>, id: number, propertyName: PersonProperties, propertyNewValue: string): Array<Person>{
+    const findAndChangeItemProperty = (item: Person): Person =>{
         if(item.id === id){
             //Copia o item original e depois substitui o conteúdo da propriedade escolhida
             return {...item, [propertyName]: propertyNewValue };
@@ -11,20 +19,28 @@ function changePersonPropertyFunctional(array: Array<person>, id: number, proper
             return item;
         }
     };
-    const editedArray: Array<person> = array.map(findAndChangeItemProperty);
+    const editedArray: Array<Person> = personList.map(findAndChangeItemProperty);
     
     return editedArray;
 }
 
 //Abordagem imperativa
 
-export function changePersonPropertyImperative(array: Array<person>, id: number, propertyName: personProperties, propertyNewValue: string): Array<person>{
-    const editedArray: Array<person> = [];
-    for(let i: number = 0; i < array.length; i++){
-        if(array[i].id === id){
-            editedArray.push({...array[i], [propertyName]: propertyNewValue});
+/**
+ * Muda a propriedade desejada do objeto com a id informada e retorna o array com o objeto editado
+ * @param personList Array com todos os objetos tipo pessoa
+ * @param id Id do objeto tipo pessoa para buscar
+ * @param propertyName Nome da propriedade a ser editada
+ * @param propertyNewValue O novo valor para essa propriedade
+ * @returns Novo array com o objeto editado
+ */
+export function changePersonPropertyImperative(personList: Array<Person>, id: number, propertyName: PersonProperties, propertyNewValue: string): Array<Person>{
+    const editedArray: Array<Person> = [];
+    for(let i: number = 0; i < personList.length; i++){
+        if(personList[i].id === id){
+            editedArray.push({...personList[i], [propertyName]: propertyNewValue});
         }else{
-            editedArray.push(array[i]);
+            editedArray.push(personList[i]);
         }
     }
 
