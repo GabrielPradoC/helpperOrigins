@@ -29,7 +29,7 @@
     <div id="exercise2">
         <h1>Exercício 2: </h1>
         <p>Dado o Array: </p>
-        <code>let lista = new Array<Object> = [
+        <code>let lista = new Array<> = [
             {"id" : 1, "name": "Ada Lovelace", "bio" : "Ada Lovelace, foi uma matemática e escritora inglesa reconhecida por ter escrito o primeiro algoritmo para ser processado por uma máquina"},
             {"id" : 2, "name": "Alan Turing", "bio" : "Alan Turing foi um matemático, cientista da computação, lógico, criptoanalista, filósofo e biólogo teórico britânico, ele é amplamente considerado o pai da ciência da computação teórica e da inteligência artificia"},
             {"id" : 3, "name": "Nikola Tesla", "bio" : "Nikola Tesla foi um inventor, engenheiro eletrotécnico e engenheiro mecânico sérvio, mais conhecido por suas contribuições ao projeto do moderno sistema de fornecimento de eletricidade em corrente alternada."},
@@ -57,8 +57,8 @@
                <input type="button" id="exercise2-form-delete-button" value="Deletar item">
            </form>
         </div>
-        
     </div>
+
     <div id="exercise3">
         <h1>Exercício 3: </h1>
         <p>Crie uma função que receba uma lista (valide se é numérica) e retorne outra contendo o maior valor, o menor valor e o valor médio.</p>
@@ -96,6 +96,31 @@
             <tr id="exercise3-table-results3">
             </tr>
         </table>
+    </div>
+    <div id="exercise4">
+        <h1>Exercício 4: </h1>
+        <p>Com o array do exercício 2 faça:</p>
+        <ol>
+            <li>Uma tabela HTML que liste todos os registros</li>
+            <li>Um formulário que faça a edição dos dados</li>
+            <li>Um CTA para este formulário a partir da lista</li>
+            <li>Um CTA para excluir um item dessa lista</li>
+        </ol>
+        <table id="exercise4-table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Bio</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="exercise4-table-body">
+
+            </tbody>
+        </table>
+        <form id="exercise4-table-edit-form">
+        </form>
     </div>
 </body>
 </html>

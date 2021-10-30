@@ -16,7 +16,7 @@ type personFilterFunctionByProperty = (propertyName: string, searchValue: string
 
 export type personFilterFunction = (item: person)=> boolean;
 
-export let lista: Array<person> = [
+export let personList: Array<person> = [
     {"id" : 1, "name": "Ada Lovelace", "bio" : "Ada Lovelace, foi uma matemática e escritora inglesa reconhecida por ter escrito o primeiro algoritmo para ser processado por uma máquina"},
     {"id" : 2, "name": "Alan Turing", "bio" : "Alan Turing foi um matemático, cientista da computação, lógico, criptoanalista, filósofo e biólogo teórico britânico, ele é amplamente considerado o pai da ciência da computação teórica e da inteligência artificia"},
     {"id" : 3, "name": "Nikola Tesla", "bio" : "Nikola Tesla foi um inventor, engenheiro eletrotécnico e engenheiro mecânico sérvio, mais conhecido por suas contribuições ao projeto do moderno sistema de fornecimento de eletricidade em corrente alternada."},
@@ -43,8 +43,8 @@ idSelectElement.addEventListener('change', (): void=>{
         const inputIdString: string = idSelectElement.value;
         const integerId: number = parseInt(inputIdString);
         selectedItemId = integerId;
-        const personName: string = getPersonNameByIdImperative(lista, integerId);
-        const personBio: string = getPersonBioByIdFunctional(lista, integerId);
+        const personName: string = getPersonNameByIdImperative(personList, integerId);
+        const personBio: string = getPersonBioByIdFunctional(personList, integerId);
         nameOutputElement.textContent = personName;
         bioOutputElement.textContent = personBio;
         if(selectedEditField === 'name'){
@@ -58,7 +58,7 @@ editFormElement.addEventListener('submit',(event: SubmitEvent): void=>{
     //Para evitar o recarregamento da página
     event.preventDefault();
     const propertyNewValue: string = editFormInputElement.value;
-    lista = changePersonPropertyImperative(lista, selectedItemId, selectedEditField, propertyNewValue);  
+    personList = changePersonPropertyImperative(personList, selectedItemId, selectedEditField, propertyNewValue);  
     updateDisplayedItem();
 });
 
@@ -68,15 +68,15 @@ editFormSelectElement.addEventListener('change', (): void=>{
 });
 
 formDeleteButtonElement.addEventListener('click', (): void=>{
-    lista = deletePersonByIdFunctional(lista, selectedItemId);
-    if(lista.length === 0){
+    personList = deletePersonByIdFunctional(personList, selectedItemId);
+    if(personList.length === 0){
         formEditButtonElement.disabled = true;
         formDeleteButtonElement.disabled = true;
         editFormSelectElement.disabled = true;
         clearElementChildren(idSelectElement);
         return;
     }
-    loadPageItems(lista);
+    loadPageItems(personList);
     updateDisplayedItem();
 });
 
