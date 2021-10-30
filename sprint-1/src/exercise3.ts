@@ -105,7 +105,8 @@ export function generateUserRandomValues(): void{
 
 function deleteElementChildren(elementId: string): void{
     const parentElement = document.getElementById(elementId) as HTMLElement;
-    while(parentElement.firstChild){
-        parentElement.firstChild.remove();
-    }
+    while(parentElement.children[0]){
+        const firstChild = parentElement.children[0] as HTMLElement;
+        firstChild.remove();
+    };
 }
