@@ -12,7 +12,7 @@ customUserInputElement.addEventListener('change', ():void=>{
 //Abordagem funcional
 
 function getMinMedianMaxValueFunctional(array: Array<number>): Array<number>{
-    const isOnlyNumeric: boolean = array.every((item: number): boolean=> /^[0-9]{1,}$/.test(item.toString()));
+    const isOnlyNumeric: boolean = array.every((item: number): boolean=> /\D/g.test(item.toString()));
     if(isOnlyNumeric){
         const arrayCopy: Array<number> = [...array];
         const maxValue: number = Math.max(...arrayCopy);
@@ -29,7 +29,7 @@ function getMinMedianMaxValueFunctional(array: Array<number>): Array<number>{
 //Abordagem imperativa 
 
 function getMinMedianMaxValueImperative(array: Array<number>): Array<number>{
-    const isOnlyNumeric: boolean = array.every((item: number): boolean=> /^[0-9]{1,}$/.test(item.toString()));
+    const isOnlyNumeric: boolean = array.every((item: number): boolean=> /\D/g.test(item.toString()));
     if(isOnlyNumeric){
         const arrayCopy: Array<number> = [...array];
         let maxValue: number = -Infinity;
