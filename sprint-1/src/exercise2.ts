@@ -67,6 +67,7 @@ formDeleteButtonElement.addEventListener('click', (): void=>{
         formEditButtonElement.disabled = true;
         formDeleteButtonElement.disabled = true;
         editFormSelectElement.disabled = true;
+        idSelectElement.disabled = true;
         clearElementChildren(idSelectElement);
         return;
     }
