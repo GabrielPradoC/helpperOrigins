@@ -1,3 +1,4 @@
+import { createButtonElement, createDivElement, createInputElement, createSpanElement } from "./DomUtils";
 import { Person, personList } from "./exercise2";
 
 let listCopy: Array<Person> = [...personList];
@@ -6,15 +7,18 @@ const editFormElement = document.getElementById('exercise4-table-edit-form') as 
 
 editFormElement.addEventListener('submit', (event: SubmitEvent): void=>{
     event.preventDefault();
+
     const clickedButtonElement = event.submitter as HTMLButtonElement;
     const editingPersonId: number = parseInt(clickedButtonElement.value);
     const personExists: boolean = !!listCopy.find((item: Person)=> item.id === editingPersonId);
+
     if((clickedButtonElement.value === 'cancel') || (!personExists)){
         deleteElementChildren(editFormElement);
     }else{
         const nameInputElement = editFormElement.querySelector('.name-input') as HTMLInputElement;
         const bioInputElement = editFormElement.querySelector('.bio-input') as HTMLInputElement;
         const oldPersonIndex: number = listCopy.findIndex((item: Person): boolean=> item.id === editingPersonId);
+
         listCopy[oldPersonIndex].name = nameInputElement.value;
         listCopy[oldPersonIndex].bio = bioInputElement.value;
         deleteElementChildren(outputTableElement);
@@ -31,6 +35,7 @@ createAndAppendPersonData(listCopy);
  */
 function createAndAppendPersonData(itemArray: Array<Person>): void{
     const tableRowArray: Array<HTMLTableRowElement> = itemArray.map(createPersonTableRow);
+
     outputTableElement.append(...tableRowArray);
 }
 
@@ -42,10 +47,11 @@ function createAndAppendPersonData(itemArray: Array<Person>): void{
 function createPersonTableRow(item: Person): HTMLTableRowElement{
     const tableRowElement = document.createElement('tr') as HTMLTableRowElement;
     const personTableData: Array<HTMLTableCellElement> = createPersonTableData(item);
-    tableRowElement.id = `exercise4-table-row-person-${item.id}`;
-    tableRowElement.append(...personTableData);
-    const actionButtons: HTMLDivElement = createTableActionButtons(item.id);
     const tableDataCellActions = document.createElement('td') as HTMLTableCellElement;
+    const actionButtons: HTMLDivElement = createTableActionButtons(item.id);
+
+    tableRowElement.id = `exercise4-table-row-person-${item.id}`;
+    tableRowElement.append(...personTableData);    
     tableDataCellActions.appendChild(actionButtons);
     tableRowElement.appendChild(tableDataCellActions);
     return tableRowElement;
@@ -58,8 +64,10 @@ function createPersonTableRow(item: Person): HTMLTableRowElement{
  */
 function createPersonTableData(item: Person): Array<HTMLTableCellElement>{
     const tableRowArray: Array<HTMLTableCellElement> = [];
+
     for(let property in item){
         const tableCellElement = document.createElement('td') as HTMLTableCellElement;
+
         tableCellElement.textContent = `${item[property]}`;
         tableCellElement.className = `exercise4-table-data-person-${property}`;
         tableRowArray.push(tableCellElement);
@@ -73,14 +81,10 @@ function createPersonTableData(item: Person): Array<HTMLTableCellElement>{
  * @returns Um elemento div com os 2 botões
  */
 function createTableActionButtons(personId: number): HTMLDivElement{
-    const tableEditButton = document.createElement('button') as HTMLButtonElement;
-    const tableDeleteButton = document.createElement('button') as HTMLButtonElement;
-    const divElement = document.createElement('div') as HTMLDivElement;
-    divElement.className = 'btn-group';
-    tableEditButton.innerText = 'Editar';
-    tableEditButton.className = 'btn btn-outline-secondary';
-    tableDeleteButton.className = 'btn btn-outline-danger';
-    tableDeleteButton.innerText = 'Deletar';
+    const tableEditButton: HTMLButtonElement = createButtonElement('btn btn-outline-secondary', 'Editar');
+    const tableDeleteButton: HTMLButtonElement = createButtonElement('btn btn-outline-danger', 'Deletar');
+    const divElement: HTMLDivElement = createDivElement('btn-group');
+    
     tableDeleteButton.addEventListener('click', deleteTableRowElement.bind(this, personId));
     tableEditButton.addEventListener('click', createEditInputElement.bind(this, personId));
     divElement.append(tableEditButton, tableDeleteButton);
@@ -94,6 +98,7 @@ function createTableActionButtons(personId: number): HTMLDivElement{
  */
 function getPersonInfo(personId: number): Person{
     const [ requestedPerson ]: Array<Person> = listCopy.filter((person: Person)=> person.id === personId);
+
     return requestedPerson;
 }
 
@@ -103,6 +108,7 @@ function getPersonInfo(personId: number): Person{
  */
 function deleteTableRowElement(personId: number): void{
     const tableBody = document.getElementById('exercise4-table-body') as HTMLTableElement;
+
     deleteElementChildren(tableBody);
     listCopy = listCopy.filter((item: Person): boolean=> item.id !== personId);
     updateUi();
@@ -121,6 +127,7 @@ function createEditInputElement(personId: number): void{
         const nameInputElement = editFormElement.querySelector('.name-input') as HTMLInputElement;
         const bioInputElement = editFormElement.querySelector('.bio-input') as HTMLInputElement;
         const formConfirmButtonElement = editFormElement.querySelector('.confirm-edit') as HTMLInputElement;
+
         nameInputElement.value = person.name;
         bioInputElement.value = person.bio;
         formConfirmButtonElement.value = personId.toString();
@@ -138,22 +145,11 @@ function createEditInputElement(personId: number): void{
 function createEditPersonForm(name: string, bio:string, id: number): void{
     const nameEditFieldElement: HTMLDivElement = createInputWithLabel('Nome: ', 'name', name);
     const bioEditFieldElement: HTMLDivElement = createInputWithLabel('Bio: ', 'bio', bio);
-    const confirmEditButton = document.createElement('button') as HTMLButtonElement;
-    const cancelEditButton = document.createElement('button') as HTMLButtonElement;
-    confirmEditButton.innerText = 'Confirmar edição';
-    confirmEditButton.className = 'btn btn-outline-success';
-    cancelEditButton.innerText = 'Cancelar edição';
-    cancelEditButton.className = 'btn btn-outline-danger';
-    confirmEditButton.classList.add('confirm-edit');
-    cancelEditButton.classList.add('cancel-edit');
-    confirmEditButton.value = id.toString();
-    cancelEditButton.value = 'cancel';
-    confirmEditButton.type = 'submit';
-    cancelEditButton.type = 'submit';
-    const divElement = document.createElement('div') as HTMLDivElement;
-    divElement.className = 'card';
-    const divElementCardBody = document.createElement('div') as HTMLDivElement;
-    divElementCardBody.className = 'card-body';
+    const confirmEditButton: HTMLButtonElement = createButtonElement('btn btn-outline-success confirm-edit', 'Confirmar edição', id.toString(), 'submit');
+    const cancelEditButton: HTMLButtonElement = createButtonElement('btn btn-outline-danger cancel-edit', 'Cancelar edição', 'cancel', 'submit');
+    const divElement: HTMLDivElement = createDivElement('card');
+    const divElementCardBody: HTMLDivElement = createDivElement('card-body');
+
     divElementCardBody.append(nameEditFieldElement, bioEditFieldElement, confirmEditButton, cancelEditButton);
     divElement.appendChild(divElementCardBody);
     editFormElement.appendChild(divElement);
@@ -167,15 +163,10 @@ function createEditPersonForm(name: string, bio:string, id: number): void{
  * @returns Elemento div contendo o elemento input e o elemento span
  */
 function createInputWithLabel(labelText: string, labelClassName: string, inputString: string): HTMLDivElement{
-    const divElement = document.createElement('div') as HTMLDivElement;
-    const spanElement = document.createElement('span') as HTMLSpanElement;
-    const inputElement = document.createElement('input') as HTMLInputElement;
-    divElement.className = 'input-group mb-3';
-    inputElement.type = 'text';
-    inputElement.value = inputString;
-    inputElement.className =`${labelClassName}-input form-control`;
-    spanElement.textContent = labelText;
-    spanElement.className = 'input-group-text';
+    const divElement: HTMLDivElement = createDivElement('input-group mb-3');
+    const spanElement: HTMLSpanElement = createSpanElement('input-group-text', labelText);
+    const inputElement: HTMLInputElement = createInputElement('text', inputString, `${labelClassName}-input form-control`);
+
     divElement.append(spanElement, inputElement);
     return divElement;
 }
