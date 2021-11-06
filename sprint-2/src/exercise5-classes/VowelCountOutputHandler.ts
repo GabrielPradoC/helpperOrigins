@@ -5,7 +5,6 @@ import Phrase from "./Phrase";
  */
 export class VowelCountOutputHandler extends Phrase {
 
-    private displayVowelCountElemmentId : string;
     private displayVowelCountElemment: HTMLSpanElement;
 
     /**
@@ -15,8 +14,7 @@ export class VowelCountOutputHandler extends Phrase {
      */
     constructor(text: string, vowelCountElementId: string){
         super(text);
-        this.displayVowelCountElemmentId = vowelCountElementId;
-        this.displayVowelCountElemment = document.getElementById(this.displayVowelCountElemmentId) as HTMLSpanElement;
+        this.displayVowelCountElemment = document.getElementById(vowelCountElementId) as HTMLSpanElement;
         this.updateVowelCountElement();
     }
 

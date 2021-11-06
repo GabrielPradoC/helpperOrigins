@@ -1,13 +1,13 @@
 /**
- * Cria uma classe contendo uma string e um método para retornar o número de vogais nessa string
+ * Cria uma classe para armazenar e manipular uma string
  */
 export default class Phrase {
 
     private string: string;
 
     /**
-     * 
-     * @param string String para ser utilizada no método getVowelCount
+     * Inicialização da classe, armazena a string passada
+     * @param string 
      */
     constructor(string: string) {
         this.string = string;
