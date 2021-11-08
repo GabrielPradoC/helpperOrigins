@@ -53,7 +53,7 @@ export function createDivElement(className: string = ''): HTMLDivElement{
  * @param type Uma string informando qual será o tipo do elemento button
  * @returns O elemento button
  */
-export function createButtonElement({className, innerText, value, type = 'button'}: Button): HTMLButtonElement{
+export function createButtonElement({className, innerText, value = 'cancel', type = 'button'}: Button): HTMLButtonElement{
     const buttonElement = document.createElement('button') as HTMLButtonElement;
 
     buttonElement.className = className;
