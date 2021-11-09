@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
       "noImplicitAny": true,
-      "removeComments": true,
+      "removeComments": false,
       "module": "ES2020",
       "target": "ES2015",
       "moduleResolution": "classic"

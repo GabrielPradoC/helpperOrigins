@@ -17,6 +17,7 @@ class UserInputFormHandler{
     constructor(inputFormId: string){
         this.formElement = document.getElementById(inputFormId) as HTMLFormElement;
         this.formElement.addEventListener('submit', (event: SubmitEvent): void =>{
+            console.log('aa')
             //Previne o recarregamento da página
             event.preventDefault();
             this.formInputElement = this.formElement.querySelector('.form-control') as HTMLInputElement;
