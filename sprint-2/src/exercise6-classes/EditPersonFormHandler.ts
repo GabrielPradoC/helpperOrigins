@@ -1,6 +1,7 @@
 import { PersonListFunctional } from "./PersonListFunctional";
 import { Person } from "../Types";
 import { Utils } from "./Utils";
+import { EnumPersonPropertyName } from "../Enums";
 
 /**
  * Classe responsável por administrar o formulário e os inputs do exercicio 6
@@ -58,40 +59,65 @@ export class EditPersonFormHandler extends PersonListFunctional{
      * Inicializa os eventListeners para interação com o formulário de edição
      */
     private setEventListeners(): void{
-        //Event listener responsável por mudar qual elemento está sendo exibido na tela por vez
+       this.setEditFormElementEventListener();
+       this.setIdSelectElementEventListener();
+       this.setFormDeleteButtonElementEventLister();
+       this.setEditFormSelectElementEventListener();
+    }
+
+    /**
+     * Adiciona um event listener responsável por mudar qual elemento está sendo exibido na tela por vez
+     */
+    private setIdSelectElementEventListener(): void{
         this.idSelectElement.addEventListener('change', (): void=>{
             const inputIdString: string = this.idSelectElement.value;
             this.selectedItemId = parseInt(inputIdString);
-            const personName: string = this.getPersonNameById(this.selectedItemId);
-            const personBio: string = this.getPersonBioById(this.selectedItemId);
+            const personName: string = this.personListObject.getPersonNameById(this.selectedItemId);
+            const personBio: string = this.personListObject.getPersonBioById(this.selectedItemId);
             this.nameOutputElement.textContent = personName;
             this.bioOutputElement.textContent = personBio;
-            if(this.selectedEditField === 'name'){
-                this.editFormInputElement.value = personName;
-            }else{
-                this.editFormInputElement.value = personBio;
+            switch(this.selectedEditField){
+                case EnumPersonPropertyName.name:
+                    this.editFormInputElement.value = personName;
+                    break;
+                case EnumPersonPropertyName.bio:
+                    this.editFormInputElement.value = personBio;
+                    break;
             }
         });
+    }
 
-        //Event listener responsável por sinalizar quando o usuário enviar um input requisitando uma mudança em um objeto
+    /**
+     * Adiciona um event listener responsável por sinalizar quando o usuário enviar um input requisitando uma mudança em um objeto
+     */
+    private setEditFormElementEventListener(): void{
         this.editFormElement.addEventListener('submit',(event: SubmitEvent): void =>{
             //Para evitar o recarregamento da página
             event.preventDefault();
             const propertyNewValue: string = this.editFormInputElement.value;
-            this.changePersonAttribute(this.selectedItemId, this.selectedEditField, propertyNewValue)
+            this.personListObject.changePersonAttribute(this.selectedItemId, this.selectedEditField, propertyNewValue)
             this.updateDisplayedItem();
         });
 
-        //Event listener responsável por mudar qual atributo do objeto está sendo exibido no momento no campo de edição
+    }
+
+    /**
+     * Adiciona um event listener responsável por mudar qual atributo do objeto está sendo exibido no momento no campo de edição
+     */
+    private setEditFormSelectElementEventListener(): void{
         this.editFormSelectElement.addEventListener('change', (): void=>{
             this.selectedEditField = this.editFormSelectElement.value;
             this.updateDisplayedItem();
         });
+    }
 
-        //Event listener responsável por sinalizar quando o usuário enviar um input requisitando a remoção de um objeto
+    /**
+     * Adiciona um event listener responsável por sinalizar quando o usuário enviar um input requisitando a remoção de um objeto
+     */
+    private setFormDeleteButtonElementEventLister(): void{
         this.formDeleteButtonElement.addEventListener('click', (): void=>{
-            this.removePersonById(this.selectedItemId);
-            if(this.personArray.length === 0){
+            this.personListObject.removePersonById(this.selectedItemId);
+            if( this.personListObject.personArray.length === 0){
                 this.disableInterfaceElements();
                 return;
             }
