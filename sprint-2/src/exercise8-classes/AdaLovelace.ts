@@ -1,5 +1,8 @@
 import { Person } from "./Person";
 
+/**
+ * Subclasse da classe Pessoa com as informações de : Ada Lovelace
+ */
 export class AdaLovelace extends Person{
     constructor(){
         super();

@@ -1,5 +1,8 @@
 import { Person } from "./Person";
 
+/**
+ * Subclasse da classe Pessoa com as informações de : Alan Turing
+ */
 export class AlanTuring extends Person{
     constructor(){
         super();

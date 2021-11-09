@@ -1,10 +1,15 @@
-import { PersonExercise8 } from "../Types";
-
+/**
+ * Classe base para objetos do tipo pessoa
+ */
 export class Person{
     protected name: string;
     protected bio: string;
 
-    public getPersonInfo(): PersonExercise8{
-        return {name: this.name, bio: this.bio};
+    /**
+     * Retorna uma string contendo o nome e a bio da pessoa desejada
+     * @returns String
+     */
+    public getPersonInfo(): string{
+        return `Nome: ${this.name}\nBio: ${this.bio}`
     }
 }

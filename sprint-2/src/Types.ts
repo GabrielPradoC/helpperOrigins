@@ -1,5 +1,6 @@
-export type PersonExercise8 = {
-    name: string,
-    bio: string,
-    [key: string]: string;
-}
+export type Person = {
+    readonly id: number;
+    name: string;
+    bio: string;
+    isCreatorOfAda: boolean;
+};
