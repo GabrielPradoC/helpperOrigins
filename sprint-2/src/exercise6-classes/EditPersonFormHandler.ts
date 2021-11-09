@@ -1,12 +1,11 @@
-import { PersonListFunctional } from "./PersonListFunctional";
-import { Person } from "../Types";
+import { IPerson, Person } from "../Types";
 import { Utils } from "./Utils";
 import { EnumPersonPropertyName } from "../Enums";
 
 /**
  * Classe responsável por administrar o formulário e os inputs do exercicio 6
  */
-export class EditPersonFormHandler extends PersonListFunctional{
+export class EditPersonFormHandler{
 
     private idSelectElement :  HTMLSelectElement;
     private nameOutputElement :  HTMLParagraphElement;
@@ -18,13 +17,14 @@ export class EditPersonFormHandler extends PersonListFunctional{
     private formEditButtonElement :  HTMLInputElement;
     private selectedEditField: string;
     private selectedItemId: number;
+    private personListObject: IPerson;
 
     /**
-     * Armazena o array e executa algumas funções de inicialização da classe
-     * @param personArray Array com vários objetos do tipo pessoa
+     * Armazena uma instância de outra classe e executa algumas funções de inicialização desta classe
+     * 
      */
-    constructor(personArray: Array<Person>){
-        super(personArray);
+    constructor(personListObject: IPerson){
+        this.personListObject = personListObject;
         this.storeElements();
         this.storeVariables();
         this.loadPageItems();
@@ -51,7 +51,7 @@ export class EditPersonFormHandler extends PersonListFunctional{
      * Valores para carregar o nome do primeiro elemento ao finalizar o carregamento da página
      */
     private storeVariables(): void{
-        this.selectedEditField = 'name';
+        this.selectedEditField = EnumPersonPropertyName.name;
         this.selectedItemId = 1;
     }
 
@@ -147,7 +147,7 @@ export class EditPersonFormHandler extends PersonListFunctional{
     * Mapeia o array personArray para elementos option e retorna um array de elementos option
     */
     private mapListItemsToOptions(): Array<HTMLOptionElement>{
-        return this.personArray.map((person: Person): HTMLOptionElement=>{
+        return this.personListObject.personArray.map((person: Person): HTMLOptionElement=>{
             const optionElement = document.createElement('option') as HTMLOptionElement;
             optionElement.value = person.id.toString();
             optionElement.innerText = person.id.toString();

@@ -1,9 +1,9 @@
-import { Person } from "../Types";
+import { IPerson, Person } from "../Types";
 
 /**
  * Classe para manipular um objeto tipo pessoa
  */
-export class PersonListImperative{
+export class PersonListImperative implements IPerson{
 
     public personArray: Array<Person>;
 

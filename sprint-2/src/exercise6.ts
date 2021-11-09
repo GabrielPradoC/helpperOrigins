@@ -1,5 +1,6 @@
 import { EditPersonFormHandler } from "./exercise6-classes/EditPersonFormHandler";
-import { Person } from "./Types";
+import { PersonListFunctional } from "./exercise6-classes/PersonListFunctional";
+import { IPerson, Person } from "./Types";
 
 const personList: Array<Person> = [
     {"id" : 1, "name": "Ada Lovelace", "bio" : "Ada Lovelace, foi uma matemática e escritora inglesa reconhecida por ter escrito o primeiro algoritmo para ser processado por uma máquina"},
@@ -8,4 +9,6 @@ const personList: Array<Person> = [
     {"id" : 4, "name": "Nicolau Copérnico", "bio": "Nicolau Copérnico foi um astrônomo e matemático polonês que desenvolveu a teoria heliocêntrica do Sistema Solar."}
 ]
 
-new EditPersonFormHandler(personList);
+const personListObject: IPerson = new PersonListFunctional(personList);
+
+new EditPersonFormHandler(personListObject);

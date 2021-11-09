@@ -1,10 +1,10 @@
-import { Person } from "../Types";
+import { IPerson, Person } from "../Types";
 import { EnumPersonPropertyName } from "../Enums";
 
 /**
  * Classe para manipular um objeto tipo pessoa
  */
-export class PersonListFunctional{
+export class PersonListFunctional implements IPerson{
 
     public personArray: Array<Person>;
 
