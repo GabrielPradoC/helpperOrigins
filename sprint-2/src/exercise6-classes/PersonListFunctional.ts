@@ -41,7 +41,11 @@ export class PersonListFunctional implements IPerson{
      * @returns String contendo a propriedade informada
      */
     private getPersonPropertyById(id: number, propertyName: EnumPersonPropertyName): string{
-       return this.personArray.find((person: Person): boolean=> person.id === id)[propertyName];
+       const desiredPerson: Person =  this.personArray.find((person: Person): boolean=> person.id === id);
+        if(!desiredPerson){
+           throw new Error("Não foi possível encontrar a pessoa com o id encontrado");
+        }
+        return desiredPerson[propertyName];
     }
 
     /**
