@@ -1,3 +1,4 @@
+import { EnumPersonPropertyName } from "../Enums";
 import { IPerson, Person } from "../Types";
 
 /**
@@ -67,7 +68,7 @@ export class PersonListImperative implements IPerson{
      * @param propertyName Nome da propriedado do objeto
      * @param propertyNewValue Novo valor para ser atribuído na propriedade informada
      */
-    public changePersonAttribute(id: number, propertyName: string, propertyNewValue: string): void{
+    public changePersonAttribute(id: number, propertyName: EnumPersonPropertyName, propertyNewValue: string): void{
         const editedArray: Array<Person> = [];
 
         for(let person of this.personArray){

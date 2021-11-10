@@ -58,7 +58,7 @@ export class PersonListFunctional implements IPerson{
      * @param propertyName Nome da propriedado do objeto
      * @param propertyNewValue Novo valor para ser atribuído na propriedade informada
      */
-    public changePersonAttribute(id: number, propertyName: string, propertyNewValue: string): void{
+    public changePersonAttribute(id: number, propertyName: EnumPersonPropertyName, propertyNewValue: string): void{
         this.personArray = this.personArray.map((person: Person): Person=>{
             if(person.id === id){
                 return {...person, [propertyName]: propertyNewValue};
