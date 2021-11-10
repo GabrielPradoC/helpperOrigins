@@ -2,7 +2,7 @@ export type Person = {
     readonly id: number;
     name: string;
     bio: string;
-    isCreatorOfAda: boolean;
+    ?isCreatorOfAda: boolean;
 };
 
 export enum EnumPersonNames {
@@ -11,4 +11,12 @@ export enum EnumPersonNames {
     nicolauCopernico = 'Nicolau Copérnico',
     nikolaTesla = 'Nikola Tesla',
     alanTuring = 'Alan Turing'
+}
+
+export interface IPerson {
+    personArray: Array<Person>;
+    getPersonBioById: (id: number)=> string;
+    getPersonNameById: (id: number)=> string;
+    removePersonById: (id: number)=> void;
+    changePersonAttribute: (id: number, propertyName: string, propertyNewValue: string)=> void;
 }
