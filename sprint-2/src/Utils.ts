@@ -8,8 +8,7 @@
      */
     public static clearElementChildren(element:HTMLElement): void{
         while(element.children[0]){
-            const firstChild = element.children[0] as HTMLElement;
-            firstChild.remove();
+            (element.children[0] as HTMLElement).remove();
         };
     }
 
