@@ -16,11 +16,11 @@
     /**
      * Anexa os elementos do array no elemento pai informado
      * @param elementsArray Array de elementos html
-     * @param rootElement Elemento pai
+     * @param parentElement Elemento pai
      */
-    public static appendElements(elementsArray: Array<HTMLElement>, rootElement: HTMLElement): void{
+    public static appendElements(elementsArray: Array<HTMLElement>, parentElement: HTMLElement): void{
         const documentFragment: DocumentFragment = document.createDocumentFragment();
         documentFragment.append(...elementsArray);
-        rootElement.appendChild(documentFragment);
+        parentElement.appendChild(documentFragment);
     }
 }
