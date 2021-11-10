@@ -2,7 +2,7 @@ export type Person = {
     readonly id: number;
     name: string;
     bio: string;
-    ?isCreatorOfAda: boolean;
+    isCreatorOfAda?: boolean;
 };
 
 export enum EnumPersonNames {
