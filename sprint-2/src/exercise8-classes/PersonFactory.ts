@@ -15,20 +15,19 @@ export class PersonFactory{
      * @returns Instância da classe
      */
     public static getPerson(personName: string): Person{
-        if(personName === null){
-            return null;
-        }else if(personName === 'Ada Lovelace'){
-            return new AdaLovelace();
-        }else if(personName === 'Alan Turing'){
-            return new AlanTuring();
-        }else if(personName === 'Jean Ichbiah'){
-            return new JeanIchbiah();
-        }else if(personName === 'Nicolau Copérnico'){
-            return new NicolauCopernico();
-        }else if(personName === 'Nikola Tesla'){
-            return new NikolaTesla();
-        }else{
-            return null;
+        switch(personName){
+            case 'Ada Lovelace':
+                return new AdaLovelace();
+            case 'Alan Turing':
+                return new AlanTuring();
+            case 'Jean Ichbiah':
+                return new JeanIchbiah();
+            case 'Nicolau Copérnico':
+                return new NicolauCopernico();
+            case 'Nikola Tesla':
+                return new NikolaTesla();
+            default:
+                return null;
         }
     }
 }
