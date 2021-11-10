@@ -71,11 +71,13 @@ export class EditPersonFormHandler{
     private setIdSelectElementEventListener(): void{
         this.idSelectElement.addEventListener('change', (): void=>{
             const inputIdString: string = this.idSelectElement.value;
-            this.selectedItemId = parseInt(inputIdString);
             const personName: string = this.personListObject.getPersonNameById(this.selectedItemId);
             const personBio: string = this.personListObject.getPersonBioById(this.selectedItemId);
+            
+            this.selectedItemId = parseInt(inputIdString);
             this.nameOutputElement.textContent = personName;
             this.bioOutputElement.textContent = personBio;
+            
             switch(this.selectedEditField){
                 case EnumPersonPropertyName.name:
                     this.editFormInputElement.value = personName;
