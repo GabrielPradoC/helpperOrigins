@@ -62,9 +62,8 @@ export class PersonListFunctional implements IPerson{
         this.personArray = this.personArray.map((person: Person): Person=>{
             if(person.id === id){
                 return {...person, [propertyName]: propertyNewValue};
-            }else{
-                return person;
             }
+            return person;
         });
     }
 }
