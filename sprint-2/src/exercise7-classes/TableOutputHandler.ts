@@ -24,7 +24,7 @@ export class TableOutputHandler extends ProcessNumberArrayImperative{
      */
     private initializeTable(outputTableId: string): void{
         this.outputTableElement = document.getElementById(outputTableId) as HTMLTableRowElement;
-        const sortedValues: Array<number> = this.getMinMedianMaxValues();
+        const sortedValues: Array<number> = this.getMinAverageMaxValues();
         this.createTableDataArray(sortedValues);
     }
 

@@ -32,7 +32,7 @@ export class ProcessNumberArrayFunctional{
     /**
      * Retorna a média de todos os valores do array de números
      */
-    private getMedianValue(): number{
+    private getAverageValue(): number{
         return Math.floor(this.numberArray.reduce(this.sumNumbers) / this.numberArray.length);
     }
 
@@ -50,14 +50,14 @@ export class ProcessNumberArrayFunctional{
      * Retorna o menor valor, o valor médio e o maior valor do array de números
      * @returns Um array contendo em ordem: o menor valor, a média de todos os valores e o maior valor
      */
-    public getMinMedianMaxValues(): Array<number>{
+    public getMinAverageMaxValues(): Array<number>{
         //Checa para ver se todos os elementos do array são números
         const isOnlyNumeric: boolean = this.numberArray.every((item: number): boolean=> /\d/g.test(item.toString()))
         if(isOnlyNumeric){
             const minValue: number = this.getMinValue();
-            const medianValue: number = this.getMedianValue();
+            const averageValue: number = this.getAverageValue();
             const maxValue: number = this.getMaxValue();
-            return [minValue, medianValue, maxValue];
+            return [minValue, averageValue, maxValue];
         }else{
             console.error('A lista informada não contém apenas números!');
             return null;
