@@ -1,3 +1,4 @@
+import { EnumPersonNames } from "../Types";
 import { AdaLovelace } from "./AdaLovelace";
 import { AlanTuring } from "./AlanTuring";
 import { JeanIchbiah } from "./JeanIchbiah";
@@ -16,15 +17,15 @@ export class PersonFactory{
      */
     public static getPerson(personName: string): Person{
         switch(personName){
-            case 'Ada Lovelace':
+            case EnumPersonNames.adaLovelace:
                 return new AdaLovelace();
-            case 'Alan Turing':
+            case EnumPersonNames.alanTuring:
                 return new AlanTuring();
-            case 'Jean Ichbiah':
+            case EnumPersonNames.jeanIchbiah:
                 return new JeanIchbiah();
-            case 'Nicolau Copérnico':
+            case EnumPersonNames.nicolauCopernico:
                 return new NicolauCopernico();
-            case 'Nikola Tesla':
+            case EnumPersonNames.nikolaTesla:
                 return new NikolaTesla();
             default:
                 return null;
