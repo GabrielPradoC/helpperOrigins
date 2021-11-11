@@ -45,7 +45,7 @@ export class Table{
         const userNumberInput: number = parseInt(this.userInputElement.value);
         const isInRange: boolean = (userNumberInput <=15) && (userNumberInput >=3);
         if(isInRange){
-            this.numberArrayClass.generateRandomNumbersArray(userNumberInput);
+            this.numberArrayClass.generateRandom(userNumberInput);
             this.spanOutputElement.textContent = `${this.numberArrayClass.numberArray.join(',')}`;
             Utils.clearElementChildren(this.tableOutputElement);
             new TableOutputHandler(this.numberArrayClass, this.tableOutputElementId);
