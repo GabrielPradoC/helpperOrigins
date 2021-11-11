@@ -1,5 +1,5 @@
 export interface INumberArray{
     numberArray: Array<number>;
     getMinAverageMaxValues: ()=> Array<number>;
-    generateRandomNumbersArray: (numberOfElements: number)=> void;
+    generateRandom: (numberOfElements: number)=> void;
 }
