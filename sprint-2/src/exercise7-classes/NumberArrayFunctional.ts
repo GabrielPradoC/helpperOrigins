@@ -19,7 +19,7 @@ export class NumberArrayFunctional implements INumberArray{
      * Retorna o maior valor do array de números
      * @returns O maior valor
      */
-    private getMaxValue(): number{
+    public getMaxValue(): number{
         return Math.max(...this.numberArray);
     }
 
@@ -27,14 +27,14 @@ export class NumberArrayFunctional implements INumberArray{
      * Retorna o menor valor do array de números
      * @returns O menor valor
      */
-    private getMinValue(): number{
+    public getMinValue(): number{
         return Math.min(...this.numberArray);
     }
 
     /**
      * Retorna a média de todos os valores do array de números
      */
-    private getAverageValue(): number{
+    public getAverageValue(): number{
         return Math.floor(this.numberArray.reduce(this.sumNumbers) / (this.numberArray.length || 1));
     }
 
