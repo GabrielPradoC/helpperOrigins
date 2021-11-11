@@ -35,7 +35,7 @@ export class NumberArrayImperative implements INumberArray{
                 }
                 averageValue+= number
             }
-            averageValue = Math.round(averageValue/this.numberArray.length);
+            averageValue = Math.round(averageValue/ (this.numberArray.length || 1));
             return [minValue, averageValue, maxValue];
         }else{
             console.error('A lista informada não contém apenas números!');

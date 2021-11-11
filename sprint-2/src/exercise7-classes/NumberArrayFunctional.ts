@@ -35,7 +35,7 @@ export class NumberArrayFunctional implements INumberArray{
      * Retorna a média de todos os valores do array de números
      */
     private getAverageValue(): number{
-        return Math.floor(this.numberArray.reduce(this.sumNumbers) / this.numberArray.length);
+        return Math.floor(this.numberArray.reduce(this.sumNumbers) / (this.numberArray.length || 1));
     }
 
     /**
