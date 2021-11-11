@@ -10,6 +10,7 @@ export class Table{
     private userInputElement: HTMLInputElement;
     private spanOutputElement: HTMLSpanElement;
     private tableOutputElement: HTMLTableRowElement;
+    private tableOutputElementId: string;
     private numberArrayClass: INumberArray;
 
     /**
