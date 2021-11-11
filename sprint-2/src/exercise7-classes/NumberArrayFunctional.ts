@@ -72,7 +72,7 @@ export class NumberArrayFunctional implements INumberArray{
      */
     public generateRandom(numberOfElements: number): void{
         const numberArray: Array<number> = [];
-        for(let i:number = 0; i< numberOfElements; i++){
+        for(let iterator:number = 0; iterator < numberOfElements; iterator++){
             numberArray.push(Math.floor(Math.random()*100));
         }
         this.numberArray = numberArray;
