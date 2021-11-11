@@ -1,7 +1,9 @@
+import { INumberArray } from "../Types";
+
 /**
  * Classe para lidar com um array de números
  */
-export class NumberArrayFunctional{
+export class NumberArrayFunctional implements INumberArray{
     
     public numberArray: Array<number>;
 

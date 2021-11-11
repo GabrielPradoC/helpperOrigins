@@ -1,7 +1,9 @@
+import { INumberArray } from "../Types";
+
 /**
  * Classe para processar um array de números
  */
-export class NumberArrayImperative{
+export class NumberArrayImperative implements INumberArray{
     
     public numberArray: Array<number>;
 
