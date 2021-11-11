@@ -1,9 +1,9 @@
 /**
  * Classe para processar um array de números
  */
-export class ProcessNumberArrayImperative{
+export class NumberArrayImperative{
     
-    private numberArray: Array<number>;
+    public numberArray: Array<number>;
 
     /**
      * Inicializa a classe, armazena o array de números
@@ -39,5 +39,17 @@ export class ProcessNumberArrayImperative{
             console.error('A lista informada não contém apenas números!');
             return null;
         }
+    }
+
+    /**
+     * Gera novos números aleatórios para o array da classe
+     * @param numberOfElements Quantidade de números para serem gerados
+     */
+     public generateRandomNumbersArray(numberOfElements: number): void{
+        const numberArray: Array<number> = [];
+        for(let i:number = 0; i< numberOfElements; i++){
+            numberArray.push(Math.floor(Math.random()*100));
+        }
+        this.numberArray = numberArray;
     }
 }

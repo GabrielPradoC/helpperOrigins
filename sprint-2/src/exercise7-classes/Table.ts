@@ -1,15 +1,16 @@
+import { INumberArray } from "../Types";
 import { Utils } from "../Utils";
 import { TableOutputHandler } from "./TableOutputHandler";
 
 /**
  * Classe responsável por controlar o input do usuário e o exibir na tela
  */
-export class GenerateRandomUserTableData{
+export class Table{
 
     private userInputElement: HTMLInputElement;
     private spanOutputElement: HTMLSpanElement;
     private tableOutputElement: HTMLTableRowElement;
-    private tableOutputElementId: string;
+    private numberArrayClass: INumberArray;
 
     /**
      * Inicializa a classe e armazena os 3 elementos informados
@@ -17,10 +18,11 @@ export class GenerateRandomUserTableData{
      * @param spanOutputElementId Id do elemento de vizualização do array
      * @param tableOutputElementId Id do elemento de saída para o array processado
      */
-    constructor(userInputElementId: string, spanOutputElementId: string, tableOutputElementId: string){
+    constructor(numberArrayClass: INumberArray,userInputElementId: string, spanOutputElementId: string, tableOutputElementId: string){
         this.userInputElement = document.getElementById(userInputElementId) as HTMLInputElement;
         this.spanOutputElement = document.getElementById(spanOutputElementId) as HTMLSpanElement;
         this.tableOutputElement = document.getElementById(tableOutputElementId) as HTMLTableRowElement;
+        this.numberArrayClass = numberArrayClass;
         this.tableOutputElementId = tableOutputElementId;
         this.setEventListeners();
         this.generateRandomUserTable();
@@ -42,23 +44,10 @@ export class GenerateRandomUserTableData{
         const userNumberInput: number = parseInt(this.userInputElement.value);
         const isInRange: boolean = (userNumberInput <=15) && (userNumberInput >=3);
         if(isInRange){
-            const randomNumbersArray: Array<number> = this.generateRandomNumbersArray(userNumberInput);
-            this.spanOutputElement.textContent = `${randomNumbersArray.join(',')}`;
+            this.numberArrayClass.generateRandomNumbersArray(userNumberInput);
+            this.spanOutputElement.textContent = `${this.numberArrayClass.numberArray.join(',')}`;
             Utils.clearElementChildren(this.tableOutputElement);
-            new TableOutputHandler(randomNumbersArray, this.tableOutputElementId);
+            new TableOutputHandler(this.numberArrayClass, this.tableOutputElementId);
         }
-    }
-
-    /**
-     * Gera números aleatórios
-     * @param numberOfElements Quantidade de números para serem gerados
-     * @returns Array contendo todos os números
-     */
-    private generateRandomNumbersArray(numberOfElements: number): Array<number>{
-        const numberArray: Array<number> = [];
-        for(let i:number = 0; i< numberOfElements; i++){
-            numberArray.push(Math.floor(Math.random()*100));
-        }
-        return numberArray;
     }
 }

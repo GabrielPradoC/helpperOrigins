@@ -1,20 +1,20 @@
-import { ProcessNumberArrayImperative } from "./ProcessNumberArrayImperative";
 import { Utils } from '../Utils';
+import { INumberArray } from "../Types";
 
 /**
  * Clase responsável por controlar uma tabela html
  */
-export class TableOutputHandler extends ProcessNumberArrayImperative{
+export class TableOutputHandler{
 
     private outputTableElement: HTMLTableRowElement;
-
+    private numberArrayClass:INumberArray;
     /**
      * Inicializa a classe e armazena o array de números
-     * @param numberArray Array de números
+     * @param numberArray Instância da classe NumberArray
      * @param outputTableId Id da tabela de saída
      */
-    constructor(numberArray: Array<number>, outputTableId: string){
-        super(numberArray);
+    constructor(numberArrayClass: INumberArray, outputTableId: string){
+        this.numberArrayClass = numberArrayClass;
         this.initializeTable(outputTableId);
     }
 
@@ -24,7 +24,7 @@ export class TableOutputHandler extends ProcessNumberArrayImperative{
      */
     private initializeTable(outputTableId: string): void{
         this.outputTableElement = document.getElementById(outputTableId) as HTMLTableRowElement;
-        const sortedValues: Array<number> = this.getMinAverageMaxValues();
+        const sortedValues: Array<number> = this.numberArrayClass.getMinAverageMaxValues();
         this.createTableDataArray(sortedValues);
     }
 
