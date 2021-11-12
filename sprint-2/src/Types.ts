@@ -1,3 +1,9 @@
+export interface INumberArray{
+    numberArray: Array<number>;
+    getMinAverageMaxValues: ()=> Array<number>;
+    generateRandom: (numberOfElements: number)=> void;
+};
+
 export type Person = {
     readonly id: number;
     name: string;
@@ -10,4 +16,4 @@ export interface IPerson {
     getPersonNameById: (id: number)=> string;
     removePersonById: (id: number)=> void;
     changePersonAttribute: (id: number, propertyName: string, propertyNewValue: string)=> void;
-}
+};
