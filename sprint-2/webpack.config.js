@@ -20,8 +20,7 @@ module.exports = {
           },
           exclude: /node_modules/,
       }
-  ]
-  },
+  ]},
   output: {
     filename: 'script.js',
     path: path.resolve(__dirname, 'dist'),
